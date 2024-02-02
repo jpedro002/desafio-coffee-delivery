@@ -25,6 +25,13 @@ const config: Config = {
           300: '#4B2995',
         },
         background: '#FAFAFA',
+        baseBlackScale: {
+          100: '#D7D5D5',
+          200: '#8D8686',
+          300: '#574F4D',
+          400: '#403937',
+          500: '#272221',
+        },
       },
     },
   },
