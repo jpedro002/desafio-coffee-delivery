@@ -7,7 +7,9 @@ export const Header = () => {
   return (
     <header className="flex justify-between items-center ">
       <Link href={'/'}>
-        <Image alt="sfdsd" src="/Logo.png" width={70} height={30} />
+        <Image alt="sfdsd" src="/Logo.png" width={70} height={30}
+
+        />
       </Link>
       <div className="flex gap-4">
         <div className="bg-purple-200 text-purplePesonalized-300 px-2 py-1.5 rounded-md flex items-center">
