@@ -7,10 +7,7 @@ export default function DefaultStoreLayout({
   children: ReactNode
 }) {
   return (
-    <div
-      className="grid grid-rows-[min-content_1fr] bg-background
-     min-h-screen  "
-    >
+    <div className="grid grid-rows-[min-content_1fr] min-h-screen  ">
       <Header />
       {children}
     </div>
