@@ -5,7 +5,10 @@ import { MapPin, ShoppingCart } from 'lucide-react'
 
 export const Header = () => {
   return (
-    <header className="flex justify-between items-center ">
+    <header
+      className="flex justify-between items-center max-w-[1160px] mx-auto
+    w-full py-6 px-5 "
+    >
       <Link href={'/'}>
         <Image alt="sfdsd" src="/Logo.png" width={70} height={30} />
       </Link>
