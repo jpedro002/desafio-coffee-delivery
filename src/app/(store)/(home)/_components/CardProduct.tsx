@@ -63,7 +63,7 @@ export const CardProduct = ({
           transition-colors duration-200"
         >
           <ShoppingCart size={18} />
-        </button>
+        </button >
       </div>
     </div>
   )
