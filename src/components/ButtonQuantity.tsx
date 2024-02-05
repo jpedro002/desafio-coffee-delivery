@@ -8,7 +8,11 @@ export const ButtonQuantity = () => {
   return (
     <div className="flex items-center  ">
       <button
-        onClick={() => handleRemoveItem()}
+        onClick={() => {
+          if (itemQuantity > 1) {
+            return handleRemoveItem()
+          }
+        }}
         type="button"
         className="bg-[#E6E5E5] rounded-l-md py-2 px-1 w-6 h-9
       text-purplePesonalized-300 flex justify-center items-center

@@ -8,6 +8,7 @@ interface CartContext {
   cart: Product[]
   handleAddToCart: (product: Product, quantity: number) => void
   handleRemoveFromCart: (product: Product) => void
+  handleRemoveItemDirectly: (product: Product) => void
 }
 
 const cartContext = createContext({} as CartContext)
@@ -23,9 +24,18 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     dipachCart({ type: 'REMOVE_FROM_CART', payload: { product } })
   }
 
+  const handleRemoveItemDirectly = (product: Product) => {
+    dipachCart({ type: 'REMOVE_ITEM_DIRECTLY', payload: { product } })
+  }
+
   return (
     <cartContext.Provider
-      value={{ cart, handleAddToCart, handleRemoveFromCart }}
+      value={{
+        cart,
+        handleAddToCart,
+        handleRemoveFromCart,
+        handleRemoveItemDirectly,
+      }}
     >
       {children}
     </cartContext.Provider>

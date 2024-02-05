@@ -10,7 +10,12 @@ type REMOVE_FROM_CART = {
   payload: { product: Product }
 }
 
-type CartAction = ADD_TO_CART | REMOVE_FROM_CART
+type REMOVE_ITEM_DIRECTLY = {
+  type: 'REMOVE_ITEM_DIRECTLY'
+  payload: { product: Product }
+}
+
+type CartAction = ADD_TO_CART | REMOVE_FROM_CART | REMOVE_ITEM_DIRECTLY
 
 const cartReducer = (cart: Product[], action: CartAction) => {
   switch (action.type) {
@@ -45,6 +50,9 @@ const cartReducer = (cart: Product[], action: CartAction) => {
             : item,
         )
       }
+    }
+    case 'REMOVE_ITEM_DIRECTLY': {
+      return cart.filter((item) => item.id !== action.payload.product.id)
     }
     default:
       return cart
