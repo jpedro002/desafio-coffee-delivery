@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { MapPin, ShoppingCart } from 'lucide-react'
+import { MapPin } from 'lucide-react'
+import { CartQuantiy } from './CartQuantiy'
 
 export const Header = () => {
   return (
@@ -18,12 +19,7 @@ export const Header = () => {
           <h6 className="text-base">Porto Alegre, RS</h6>
         </div>
         <Link href={'/checkout'}>
-          <div
-            className="flex justify-between items-center
-           bg-yellowPesonalized-100 p-2 rounded-md text-yellowPesonalized-300"
-          >
-            <ShoppingCart className="w-5 h-w-5 " />
-          </div>
+          <CartQuantiy />
         </Link>
       </div>
     </header>

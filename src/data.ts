@@ -1,4 +1,14 @@
-export const dataProducts = [
+export interface Product {
+  id: string
+  title: string
+  description: string
+  tags: string[]
+  price: number
+  image: string
+  quantity: number
+}
+
+export const dataProducts: Array<Product> = [
   {
     id: '0',
     title: 'Expresso Tradicional',
@@ -6,6 +16,7 @@ export const dataProducts = [
     tags: ['tradicional'],
     price: 9.9,
     image: '/Image-1.png',
+    quantity: 1,
   },
   {
     id: '1',
@@ -14,6 +25,7 @@ export const dataProducts = [
     tags: ['tradicional'],
     price: 9.9,
     image: '/Image-2.png',
+    quantity: 1,
   },
   {
     id: '2',
@@ -22,6 +34,7 @@ export const dataProducts = [
     tags: ['tradicional'],
     price: 9.9,
     image: '/Image-3.png',
+    quantity: 1,
   },
   {
     id: '3',
@@ -30,6 +43,7 @@ export const dataProducts = [
     tags: ['tradicional', 'gelado'],
     price: 9.9,
     image: '/Image-4.png',
+    quantity: 1,
   },
   {
     id: '4',
@@ -38,6 +52,7 @@ export const dataProducts = [
     tags: ['tradicional', 'com leite'],
     price: 9.9,
     image: '/Image-5.png',
+    quantity: 1,
   },
   {
     id: '5',
@@ -47,6 +62,7 @@ export const dataProducts = [
     tags: ['tradicional', 'com leite'],
     price: 9.9,
     image: '/Image-6.png',
+    quantity: 1,
   },
   {
     id: '6',
@@ -56,6 +72,7 @@ export const dataProducts = [
     tags: ['tradicional', 'com leite'],
     price: 9.9,
     image: '/Image-7.png',
+    quantity: 1,
   },
   {
     id: '7',
@@ -65,6 +82,7 @@ export const dataProducts = [
     tags: ['tradicional', 'com leite'],
     price: 9.9,
     image: '/Image-8.png',
+    quantity: 1,
   },
   {
     id: '8',
@@ -74,6 +92,7 @@ export const dataProducts = [
     tags: ['tradicional', 'com leite'],
     price: 9.9,
     image: '/Image-9.png',
+    quantity: 1,
   },
   {
     id: '9',
@@ -82,6 +101,7 @@ export const dataProducts = [
     tags: ['especial', 'com leite'],
     price: 9.9,
     image: '/Image-10.png',
+    quantity: 1,
   },
   {
     id: '10',
@@ -91,6 +111,7 @@ export const dataProducts = [
     tags: ['especial', 'alcoólico', 'gelado'],
     price: 9.9,
     image: '/Image-11.png',
+    quantity: 1,
   },
   {
     id: '11',
@@ -99,6 +120,7 @@ export const dataProducts = [
     tags: ['especial'],
     price: 9.9,
     image: '/Image-12.png',
+    quantity: 1,
   },
   {
     id: '12',
@@ -107,6 +129,7 @@ export const dataProducts = [
     tags: ['especial'],
     price: 9.9,
     image: '/Image-13.png',
+    quantity: 1,
   },
   {
     id: '13',
@@ -115,5 +138,6 @@ export const dataProducts = [
     tags: ['especial', 'alcoólico'],
     price: 9.9,
     image: '/Image-1.png',
+    quantity: 1,
   },
 ]

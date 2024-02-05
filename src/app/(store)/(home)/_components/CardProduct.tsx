@@ -1,20 +1,12 @@
 import Image from 'next/image'
-import { ShoppingCart } from 'lucide-react'
 import { ButtonQuantity } from '@/components/ButtonQuantity'
+import { ButtonCartAdd } from './ButtonCartAdd'
+import { Product } from '@/data'
+import { QuantityProductProvider } from '@/contexts/quantityProductContext'
 
-export const CardProduct = ({
-  img,
-  tags,
-  title,
-  description,
-  price,
-}: {
-  img: string
-  tags: string[]
-  title: string
-  description: string
-  price: number
-}) => {
+export const CardProduct = ({ product }: { product: Product }) => {
+  const { image, tags, title, description, price } = product
+
   return (
     <div
       className="bg-baseBlackScale-base_card w-64  px-5 pb-5 rounded-[8px_3rem_8px_3rem]
@@ -22,7 +14,7 @@ export const CardProduct = ({
     >
       <Image
         alt=""
-        src={img}
+        src={image}
         width={120}
         height={120}
         quality={100}
@@ -55,15 +47,10 @@ export const CardProduct = ({
             {price}
           </strong>
         </span>
-        <ButtonQuantity />
-        <button
-          type="button"
-          className="bg-purplePesonalized-300 text-white w-9 h-9 rounded-md
-          flex justify-center items-center active:bg-purplePesonalized-200
-          transition-colors duration-200"
-        >
-          <ShoppingCart size={18} />
-        </button >
+        <QuantityProductProvider>
+          <ButtonQuantity />
+          <ButtonCartAdd product={product} />
+        </QuantityProductProvider>
       </div>
     </div>
   )

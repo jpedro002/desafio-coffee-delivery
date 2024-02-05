@@ -12,14 +12,7 @@ export default function Home() {
         </h2>
         <div className="flex flex-wrap  gap-8  ">
           {dataProducts.map((item) => (
-            <CardProduct
-              key={item.id}
-              description={item.description}
-              img={item.image}
-              price={item.price}
-              tags={item.tags}
-              title={item.title}
-            />
+            <CardProduct key={item.id} product={item} />
           ))}
         </div>
       </section>
