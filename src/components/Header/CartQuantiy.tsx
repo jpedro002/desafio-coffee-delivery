@@ -2,14 +2,9 @@
 
 import { useCart } from '@/contexts/cartContext'
 import { ShoppingCart } from 'lucide-react'
-import { useEffect } from 'react'
 
 export const CartQuantiy = () => {
   const { cart } = useCart()
-
-  useEffect(() => {
-    console.log('cart', cart)
-  }, [cart])
 
   return (
     <div

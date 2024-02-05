@@ -10,9 +10,6 @@ export const ButtonCartAdd = ({ product }: { product: Product }) => {
   const { itemQuantity, handleResetItem } = useQuantityProduct()
 
   const handleCartAdd = (product: Product) => {
-    console.log('product', product)
-    console.log('itemQuantity', itemQuantity)
-
     handleAddToCart(product, itemQuantity)
     handleResetItem()
   }
