@@ -1,3 +1,5 @@
+'use client'
+
 import { ButtonQuantity } from '@/components/ButtonQuantity'
 import {
   Trash2,
@@ -8,8 +10,29 @@ import {
   Banknote,
 } from 'lucide-react'
 import Image from 'next/image'
+import { useForm } from 'react-hook-form'
 
-export const checkoutPage = () => {
+interface FormFields {
+  zipCode: string
+  street: string
+  number: string
+  complement: string
+  district: string
+  city: string
+  state: string
+}
+
+export const CheckoutPage = () => {
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: {} as FormFields,
+  })
+
+  const onsubmit = (data: FormFields) => {
+    console.log(data)
+  }
+
+  console.log(watch('zipCode'))
+
   return (
     <div className="flex gap-5 max-w-[1160px] mx-auto w-full py-10 px-5  ">
       <div className="min-w-[640px]">
@@ -30,6 +53,7 @@ export const checkoutPage = () => {
               placeholder="Digite seu CEP"
               className="w-[200px] h-[2.625rem] rounded-lg border-[1px] bg-baseBlackScale-base_input
                 p-2 placeholder:text-baseBlackScale-base_label px-2 py-1"
+              {...register('zipCode')}
             />
             <input
               type="text"
@@ -43,12 +67,14 @@ export const checkoutPage = () => {
                 placeholder="Número"
                 className="w-[200px] h-[2.625rem] rounded-lg border-[1px] bg-baseBlackScale-base_input
               p-2 placeholder:text-baseBlackScale-base_label px-2 py-1"
+                {...register('number')}
               />
               <input
                 type="text"
                 placeholder="Complemento"
                 className="w-full h-[2.625rem] rounded-lg border-[1px] bg-baseBlackScale-base_input
               p-2 placeholder:text-baseBlackScale-base_label px-2 py-1"
+                {...register('complement')}
               />
             </div>
             <div className="flex gap-3">
@@ -57,21 +83,25 @@ export const checkoutPage = () => {
                 placeholder="Bairro"
                 className="w-[200px] h-[2.625rem] rounded-lg border-[1px] bg-baseBlackScale-base_input
               p-2 placeholder:text-baseBlackScale-base_label px-2 py-1"
+                {...register('district')}
               />
               <input
                 type="text"
                 placeholder="Cidade"
                 className="w-[13,25rem] h-[2.625rem] rounded-lg border-[1px]
                 bg-baseBlackScale-base_input p-2 placeholder:text-baseBlackScale-base_label px-2 py-1"
+                {...register('city')}
               />
               <input
                 type="text"
                 placeholder="Estado"
                 className="w-full h-[2.625rem] rounded-lg border-[1px] bg-baseBlackScale-base_input
               p-2 placeholder:text-baseBlackScale-base_label px-2 py-1"
+                {...register('state')}
               />
             </div>
           </form>
+          <button onClick={handleSubmit(onsubmit)}>adfasdfas</button>
         </div>
         <div className="p-10 bg-baseBlackScale-base_card w-[40rem]  rounded-lg mt-3  ">
           <div className="flex flex-col gap-2">
@@ -190,4 +220,4 @@ export const checkoutPage = () => {
     </div>
   )
 }
-export default checkoutPage
+export default CheckoutPage

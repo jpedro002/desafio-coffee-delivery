@@ -6,6 +6,8 @@ import { ShoppingCart } from 'lucide-react'
 export const CartQuantiy = () => {
   const { cart } = useCart()
 
+  // TODO: Add a badge to show the quantity of products in the cart
+
   return (
     <div
       className="flex justify-between items-center
