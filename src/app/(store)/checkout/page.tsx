@@ -13,6 +13,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormCheckout } from './_components/FormCheckout'
 import { AsideCheckout } from './_components/AsideCheckout'
+import { useRouter } from 'next/navigation'
+import clsx from 'clsx'
 export interface FormFields {
   zipCode: string
   street: string
@@ -21,6 +23,7 @@ export interface FormFields {
   district: string
   city: string
   state: string
+  paymentMethod: string
 }
 
 const schema = z.object({
@@ -31,9 +34,12 @@ const schema = z.object({
   district: z.string().min(1, 'campo obrigatório'),
   city: z.string().min(1, 'campo obrigatório'),
   state: z.string().min(1, 'campo obrigatório'),
+  paymentMethod: z.string().min(1, 'campo obrigatório'),
 })
 
 export const CheckoutPage = () => {
+  const router = useRouter()
+
   const { register, handleSubmit, watch, setValue, formState } =
     useForm<FormFields>({
       defaultValues: {
@@ -44,11 +50,18 @@ export const CheckoutPage = () => {
         district: '',
         city: '',
         state: '',
+        paymentMethod: '',
       } as FormFields,
       resolver: zodResolver(schema),
     })
 
+  const selectedPaymentMethod = watch('paymentMethod')
+
   const zipCode = watch('zipCode')
+
+  useEffect(() => {
+    console.log(selectedPaymentMethod)
+  }, [selectedPaymentMethod])
 
   useEffect(() => {
     if (zipCode?.length === 8) {
@@ -60,11 +73,14 @@ export const CheckoutPage = () => {
           setValue('city', data.localidade)
           setValue('state', data.uf)
           setValue('complement', data.complemento)
+          console.log(data)
         })
     }
   }, [zipCode, setValue])
 
-  const onsubmit = (data: FormFields) => {
+  const onSubmit = (data: FormFields) => {
+    const path = Object.values(data).join('/')
+    router.push(`/success/${path}`)
     console.log(data)
   }
 
@@ -97,35 +113,71 @@ export const CheckoutPage = () => {
               </div>
             </div>
             <div className="flex gap-4 mt-6 items-center justify-center">
-              <div
-                className="bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem] rounded-lg
-              flex items-center gap-2 px-3 py-2 text-sm
-              "
-              >
-                <CreditCard className="text-purplePesonalized-300" />
-                <span>Cartão de crédito </span>
-              </div>
-              <div
-                className="bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem] rounded-lg
-              flex items-center gap-2 px-3 py-2 text-sm
-              "
-              >
-                <Landmark className="text-purplePesonalized-300" />
-                <span>cartão de débito </span>
-              </div>
-              <div
-                className="bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem] rounded-lg
-              flex items-center gap-2 px-3 py-2 text-sm
-              "
-              >
-                <Banknote className="text-purplePesonalized-300" />
-                <span>dinheiro</span>
-              </div>
+              <label>
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  value="cartão de crédito"
+                  className="hidden"
+                />
+                <div
+                  className={clsx(
+                    `bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem]
+                    rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
+                     border-transparent`,
+                    selectedPaymentMethod === 'cartão de crédito' &&
+                      'border-purplePesonalized-200',
+                  )}
+                >
+                  <CreditCard className="text-purplePesonalized-300" />
+                  <span>Cartão de crédito </span>
+                </div>
+              </label>
+              <label>
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  value="cartão de débito"
+                  className="hidden"
+                />
+                <div
+                  className={clsx(
+                    `bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem]
+                    rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
+                     border-transparent`,
+                    selectedPaymentMethod === 'cartão de débito' &&
+                      'border-purplePesonalized-200',
+                  )}
+                >
+                  <Landmark className="text-purplePesonalized-300" />
+                  <span>cartão de débito </span>
+                </div>
+              </label>
+              <label>
+                <input
+                  {...register('paymentMethod')}
+                  type="radio"
+                  value="dinheiro"
+                  className="hidden"
+                />
+                <div
+                  className={clsx(
+                    `bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem]
+                    rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
+                     border-transparent`,
+                    selectedPaymentMethod === 'dinheiro' &&
+                      'border-purplePesonalized-200',
+                  )}
+                >
+                  <Banknote className="text-purplePesonalized-300" />
+                  <span>dinheiro</span>
+                </div>
+              </label>
             </div>
           </div>
         </div>
       </div>
-      <AsideCheckout onClick={handleSubmit(onsubmit)} />
+      <AsideCheckout onClick={handleSubmit(onSubmit)} />
     </div>
   )
 }

@@ -18,9 +18,7 @@ export const Header = () => {
           <MapPin className="w-5 h-w-5 " />
           <h6 className="text-base">Porto Alegre, RS</h6>
         </div>
-        <Link href={'/checkout'}>
-          <CartQuantiy />
-        </Link>
+        <CartQuantiy />
       </div>
     </header>
   )

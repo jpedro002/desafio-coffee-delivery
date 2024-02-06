@@ -3,6 +3,7 @@
 import { useCart } from '@/contexts/cartContext'
 import { Trash2, Plus, Minus } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export const AsideCheckout = ({ onClick }: { onClick: () => void }) => {
@@ -17,13 +18,19 @@ export const AsideCheckout = ({ onClick }: { onClick: () => void }) => {
 
   const [total, setTotal] = useState(0)
 
+  const router = useRouter()
+
   useEffect(() => {
+    if (cart.length === 0) {
+      return router.push('/')
+    }
+
     const totalValue = cart.reduce((acc, item) => {
       return acc + item.price * item.quantity
     }, 0)
 
     setTotal(totalValue)
-  }, [cart])
+  }, [cart, router])
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('pt-BR', {
