@@ -85,7 +85,10 @@ export const CheckoutPage = () => {
   }
 
   return (
-    <div className="flex gap-5 max-w-[1160px] mx-auto w-full py-10 px-5 justify-between  ">
+    <div
+      className="flex gap-5 max-w-[1160px] mx-auto w-full py-10 px-5 justify-between
+     flex-col items-center lg:items-start lg:flex-row   "
+    >
       <div className="min-w-[640px]">
         <h2 className="mb-5 font-baloo2 font-bold text-title_XS ">
           Complete seu pedido

@@ -10,7 +10,7 @@ export default function Home() {
         <h2 className="font-bold text-title_L font-baloo2 mb-16">
           Nossos cafés
         </h2>
-        <div className="flex flex-wrap  gap-8  ">
+        <div className="flex flex-wrap  gap-8 justify-center xl:justify-start ">
           {dataProducts.map((item) => (
             <CardProduct key={item.id} product={item} />
           ))}

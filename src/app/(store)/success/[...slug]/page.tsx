@@ -20,7 +20,11 @@ export default function SuccessPage() {
 
   return (
     <main className="">
-      <div className="max-w-[1160px] mx-auto px-5 py-10 flex justify-between">
+      <div
+        className="max-w-[1160px] mx-auto px-5 py-10 flex justify-between
+      flex-col items-center lg:items-start lg:flex-row
+      "
+      >
         <article className="max-w-[526px] min-w-[526px]">
           <h1
             className="text-title_L font-bold mb-1
@@ -95,7 +99,7 @@ export default function SuccessPage() {
           src="/motoca.png"
           width={492}
           height={293}
-          className="self-end  "
+          className="md:self-end  "
         />
       </div>
     </main>

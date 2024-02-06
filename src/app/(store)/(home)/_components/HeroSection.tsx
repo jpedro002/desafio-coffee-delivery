@@ -4,7 +4,7 @@ import { Package, Coffee, Clock1, ShoppingCart } from 'lucide-react'
 export const HeroSection = () => {
   return (
     <section
-      className="flex justify-between py-[92px] px-5 gap-4 max-w-[1160px] mx-auto
+      className="flex justify-between py-[92px] px-5 gap-4 max-w-[1160px] mx-auto flex-col lg:flex-row items-center lg:items-start
     "
     >
       <article
