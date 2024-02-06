@@ -15,6 +15,7 @@ import { FormCheckout } from './_components/FormCheckout'
 import { AsideCheckout } from './_components/AsideCheckout'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
+import { useCart } from '@/contexts/cartContext'
 export interface FormFields {
   zipCode: string
   street: string
@@ -40,6 +41,8 @@ const schema = z.object({
 export const CheckoutPage = () => {
   const router = useRouter()
 
+  const { handleClearCart } = useCart()
+
   const { register, handleSubmit, watch, setValue, formState } =
     useForm<FormFields>({
       defaultValues: {
@@ -60,10 +63,6 @@ export const CheckoutPage = () => {
   const zipCode = watch('zipCode')
 
   useEffect(() => {
-    console.log(selectedPaymentMethod)
-  }, [selectedPaymentMethod])
-
-  useEffect(() => {
     if (zipCode?.length === 8) {
       fetch(`https://viacep.com.br/ws/${zipCode}/json/`)
         .then((response) => response.json())
@@ -73,7 +72,6 @@ export const CheckoutPage = () => {
           setValue('city', data.localidade)
           setValue('state', data.uf)
           setValue('complement', data.complemento)
-          console.log(data)
         })
     }
   }, [zipCode, setValue])
@@ -81,7 +79,7 @@ export const CheckoutPage = () => {
   const onSubmit = (data: FormFields) => {
     const path = Object.values(data).join('/')
     router.push(`/success/${path}`)
-    console.log(data)
+    handleClearCart()
   }
 
   return (

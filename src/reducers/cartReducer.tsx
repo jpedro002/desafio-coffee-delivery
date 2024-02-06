@@ -15,7 +15,15 @@ type REMOVE_ITEM_DIRECTLY = {
   payload: { product: Product }
 }
 
-type CartAction = ADD_TO_CART | REMOVE_FROM_CART | REMOVE_ITEM_DIRECTLY
+type CLEAR_CART = {
+  type: 'CLEAR_CART'
+}
+
+type CartAction =
+  | ADD_TO_CART
+  | REMOVE_FROM_CART
+  | REMOVE_ITEM_DIRECTLY
+  | CLEAR_CART
 
 const cartReducer = (cart: Product[], action: CartAction) => {
   switch (action.type) {
@@ -53,6 +61,9 @@ const cartReducer = (cart: Product[], action: CartAction) => {
     }
     case 'REMOVE_ITEM_DIRECTLY': {
       return cart.filter((item) => item.id !== action.payload.product.id)
+    }
+    case 'CLEAR_CART': {
+      return []
     }
     default:
       return cart
