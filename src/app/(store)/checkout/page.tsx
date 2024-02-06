@@ -126,7 +126,7 @@ export const CheckoutPage = () => {
                     rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
                      border-transparent`,
                     selectedPaymentMethod === 'cartão de crédito' &&
-                      'border-purplePesonalized-200',
+                      'border-purplePesonalized-200 bg-purplePesonalized-100',
                   )}
                 >
                   <CreditCard className="text-purplePesonalized-300" />
@@ -146,7 +146,7 @@ export const CheckoutPage = () => {
                     rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
                      border-transparent`,
                     selectedPaymentMethod === 'cartão de débito' &&
-                      'border-purplePesonalized-200',
+                      'border-purplePesonalized-200 bg-purplePesonalized-100',
                   )}
                 >
                   <Landmark className="text-purplePesonalized-300" />
@@ -166,7 +166,7 @@ export const CheckoutPage = () => {
                     rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
                      border-transparent`,
                     selectedPaymentMethod === 'dinheiro' &&
-                      'border-purplePesonalized-200',
+                      'border-purplePesonalized-200 bg-purplePesonalized-100',
                   )}
                 >
                   <Banknote className="text-purplePesonalized-300" />
