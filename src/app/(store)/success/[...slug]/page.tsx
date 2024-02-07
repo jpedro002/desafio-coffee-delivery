@@ -3,20 +3,36 @@
 import { MapPin, Clock, DollarSignIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useCart } from '@/contexts/cartContext'
 
-export default function SuccessPage() {
-  const { slug } = useParams()
+export default function SuccessPage({
+  params,
+}: {
+  params: {
+    slug: string[]
+  }
+}) {
   const [adress, setAdress] = useState<string[]>([])
 
   const router = useRouter()
 
+  const { handleClearCart } = useCart()
+
   useEffect(() => {
-    if (Array.isArray(slug)) {
-      const decodedSlug = slug.map((item) => decodeURIComponent(item).trim())
+    handleClearCart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (Array.isArray(params.slug)) {
+      const decodedSlug = params.slug.map((item) =>
+        decodeURIComponent(item).trim(),
+      )
+
       return setAdress(decodedSlug)
     } else return router.push('/')
-  }, [slug, router])
+  }, [router, params.slug])
 
   return (
     <main className="">
@@ -51,10 +67,10 @@ export default function SuccessPage() {
               </div>
               <div className="flex flex-col">
                 <span className="text-baseBlackScale-base_text   ">
-                  Entrega em <strong>{adress[1] + ' ' + adress[2]}</strong>
+                  Entrega em <strong>{adress[0] + ' ' + adress[1]}</strong>
                 </span>
                 <span>
-                  {adress[4]} - {adress[5]}, {adress[6]}
+                  {adress[5]} - {adress[2]}, {adress[3]}
                 </span>
               </div>
             </div>
@@ -89,7 +105,7 @@ export default function SuccessPage() {
                 <span className="text-baseBlackScale-base_text   ">
                   Pagamento na entrega
                 </span>
-                <strong>{adress[6]}</strong>
+                <strong>{adress[4]}</strong>
               </div>
             </div>
           </div>

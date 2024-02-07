@@ -15,7 +15,7 @@ import { FormCheckout } from './_components/FormCheckout'
 import { AsideCheckout } from './_components/AsideCheckout'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
-import { useCart } from '@/contexts/cartContext'
+
 export interface FormFields {
   zipCode: string
   street: string
@@ -38,10 +38,8 @@ const schema = z.object({
   paymentMethod: z.string().min(1, 'campo obrigatório'),
 })
 
-export const CheckoutPage = () => {
+export default function CheckoutPage() {
   const router = useRouter()
-
-  const { handleClearCart } = useCart()
 
   const { register, handleSubmit, watch, setValue, formState } =
     useForm<FormFields>({
@@ -74,12 +72,12 @@ export const CheckoutPage = () => {
           setValue('complement', data.complemento)
         })
     }
-  }, [zipCode, setValue])
+  }, [zipCode, setValue, selectedPaymentMethod])
 
   const onSubmit = (data: FormFields) => {
-    const path = Object.values(data).join('/')
-    router.push(`/success/${path}`)
-    handleClearCart()
+    router.push(
+      `/success/${data.street}/${data.number}/${data.city}/${data.state}/${data.paymentMethod}/${data.district}`,
+    )
   }
 
   return (
@@ -125,9 +123,9 @@ export const CheckoutPage = () => {
                   className={clsx(
                     `bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem]
                     rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
-                     border-transparent`,
+                     `,
                     selectedPaymentMethod === 'cartão de crédito' &&
-                      'border-purplePesonalized-200 bg-purplePesonalized-100',
+                      'border-purplePesonalized-200 bg-purplePesonalized-100 border-solid ',
                   )}
                 >
                   <CreditCard className="text-purplePesonalized-300" />
@@ -145,9 +143,9 @@ export const CheckoutPage = () => {
                   className={clsx(
                     `bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem]
                     rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
-                     border-transparent`,
+                     `,
                     selectedPaymentMethod === 'cartão de débito' &&
-                      'border-purplePesonalized-200 bg-purplePesonalized-100',
+                      'border-purplePesonalized-200 bg-purplePesonalized-100 border-solid ',
                   )}
                 >
                   <Landmark className="text-purplePesonalized-300" />
@@ -165,9 +163,9 @@ export const CheckoutPage = () => {
                   className={clsx(
                     `bg-baseBlackScale-base_buttom w-[11.125rem] h-[3.1875rem]
                     rounded-lg flex items-center gap-2 px-3 py-2 text-sm border-2
-                     border-transparent`,
+                     `,
                     selectedPaymentMethod === 'dinheiro' &&
-                      'border-purplePesonalized-200 bg-purplePesonalized-100',
+                      'border-purplePesonalized-200 bg-purplePesonalized-100 border-solid ',
                   )}
                 >
                   <Banknote className="text-purplePesonalized-300" />
@@ -182,4 +180,3 @@ export const CheckoutPage = () => {
     </div>
   )
 }
-export default CheckoutPage

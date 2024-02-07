@@ -63,7 +63,7 @@ const cartReducer = (cart: Product[], action: CartAction) => {
       return cart.filter((item) => item.id !== action.payload.product.id)
     }
     case 'CLEAR_CART': {
-      return []
+      return (cart = [])
     }
     default:
       return cart
